@@ -21,6 +21,54 @@ const unsortedList = [ [7], [2], [5], [4], [1], [6], [0], [3] ];
     Gör det rekursivt
     Därefter spara listan i egna arrays enligt ovan.
 */
+
+/*
+  code from Fanzhong Zeng
+  link, https://betterprogramming.pub/merge-sort-in-javascript-ce6e0e8b8fb2
+*/
+
+console.log(unsortedList)
+function mergeSortRecursion(unsortedArray) {
+  if (unsortedArray.length <= 1) {
+    return unsortedArray
+  }
+
+  const midPoint = Math.floor(unsortedArray.length / 2);
+
+  const leftArr = unsortedArray.slice(0, midPoint)
+  const rightArr = unsortedArray.slice(midPoint)
+
+  return merTwoArrays(mergeSortRecursion(leftArr), mergeSortRecursion(rightArr))
+}
+
+function merTwoArrays(leftArr, rightArr) {
+  let resultArray = [];
+
+  let leftIndex = 0, rightIndex = 0;
+
+  while (leftIndex < leftArr.length &&
+    rightIndex < rightArr.length) {
+      if (leftArr[leftIndex] < rightArr[rightIndex]) {
+        resultArray.push(leftArr[leftIndex]);
+        leftIndex++;
+      } else {
+        resultArray.push(rightArr[rightIndex]);
+        rightIndex++;
+      }
+    }
+    if (leftArr[leftIndex]) {
+      var unaddedElements = leftArr.slice(leftIndex);
+      resultArray.push(...unaddedElements);
+    } else {
+      var unaddedElements = rightArr.slice(rightIndex);
+      resultArray.push(...unaddedElements);
+    }
+
+    return resultArray;
+}
+
+
+
 let lengthOfArray = unsortedList.length;
 
 const mergeSort = (unsortedListArrLength) => {
@@ -39,7 +87,9 @@ const mergeSort = (unsortedListArrLength) => {
   }
 };
 
-console.log(mergeSort(lengthOfArray))
+console.log(mergeSortRecursion(unsortedList))
+
+// console.log(mergeSort(lengthOfArray))
 console.log("TO DO!")
 console.log("compare current array, [ [7], [2], [5], [4], [1], [6], [0], [3] ]")
 console.log("Add test to equal, [ 0, 1, 2, 3, 4, 5, 6, 7 ] ")
