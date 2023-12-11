@@ -27,11 +27,16 @@ const unsortedList = [ [7], [2], [5], [4], [1], [6], [0], [3] ];
   link, https://betterprogramming.pub/merge-sort-in-javascript-ce6e0e8b8fb2
 */
 
+let counter = 0;
+let counterMerge = 0;
+
 console.log(unsortedList)
 function mergeSortRecursion(unsortedArray) {
   if (unsortedArray.length <= 1) {
     return unsortedArray
   }
+  console.log("counter:" , counter)
+  counter++;
 
   const midPoint = Math.floor(unsortedArray.length / 2);
 
@@ -42,6 +47,9 @@ function mergeSortRecursion(unsortedArray) {
 }
 
 function merTwoArrays(leftArr, rightArr) {
+  console.log("merge counter:", counterMerge)
+  counterMerge++;
+
   let resultArray = [];
 
   let leftIndex = 0, rightIndex = 0;
@@ -49,9 +57,11 @@ function merTwoArrays(leftArr, rightArr) {
   while (leftIndex < leftArr.length &&
     rightIndex < rightArr.length) {
       if (leftArr[leftIndex] < rightArr[rightIndex]) {
+        console.log("left arr:", leftArr[leftIndex])
         resultArray.push(leftArr[leftIndex]);
         leftIndex++;
       } else {
+        console.log("rightArr:", rightArr[rightIndex])
         resultArray.push(rightArr[rightIndex]);
         rightIndex++;
       }
